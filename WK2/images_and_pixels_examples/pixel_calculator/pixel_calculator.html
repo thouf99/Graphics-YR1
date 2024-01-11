@@ -1,0 +1,126 @@
+<html>
+<!--
+    For calculating pixel index values based on channels and offsets.
+    By Evan Raskob, 2020 <e.raskob@gold.ac.uk>
+-->
+
+<head>
+    <title>Pixel calculator</title>
+    <style type="text/css">
+        html {
+            font-size: 10px;
+        }
+        body {
+            margin: 2% 15%;
+            font-size: 1.6rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .row {
+            display: flex;
+            /* border: 1px dotted blue; */
+        }
+
+        .item {
+            flex: auto;
+            border: 1px solid grey;
+            padding: 1.6rem 3.2rem;
+            margin: 1rem 1rem;
+        }
+
+        .flex2 {
+            flex: 2;
+        }
+
+        input, select, button {
+            font-size: 1.6rem;
+            padding: 0.8rem 1.6rem;
+        }
+
+        button {
+            border-radius: 0.8rem;
+        }
+
+        /* .item:nth-of-type(1) {
+            flex: 2;
+            border: 1px dotted red;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="row">
+        <!-- https://developer.mozilla.org/en-US/docs/Web/API/HTMLSelectElement/selectedOptions -->
+        <div class="item">
+            <h1>Pixels Array index calculator</h1>
+            <h2>by Evan Raskob, 2020</h2>
+            <p>
+              Given an image width, height, and x and y position in the image, and
+              the channel offset, calculate the index in the array of that channel's
+              value.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="item">channels <select id="channels" name="channels">
+                <option value="4" selected>4 (RGBA)</option>
+                <option value="3">3 RGB</option>
+            </select></div>
+        <div class="item">channel: <select id="channel" name="channel">
+            <option value="0" selected>R</option>
+            <option value="1">G</option>
+            <option value="2">B</option>
+            <option value="3">A</option>
+        </select></div>
+    </div>
+    <div class="row">
+        <div class="item">img w: <input id="w" value="320" type="text" size="4"></div>
+        <div class="item">img h: <input id="h" value="240" type="text" size="4"></div>
+        <div class="item">x: <input id="x" value="0" type="text" size="4"></div>
+        <div class="item">y: <input id="y" value="0" type="text" size="4"></div>
+        
+    </div>
+    <div class="row">
+        <div class="item"><h1>Pixels array index: <span id="result">0</span></h1>
+            <button name="calculate" id="calculate">
+                calculate
+            </button>
+        </div>
+    </div>
+    
+
+    <script type="text/javascript">
+        let channels = document.getElementById("channels");
+        let channel = document.getElementById("channel");        
+        let result = document.getElementById("result");
+        let calcButton = document.getElementById("calculate");
+
+        channels.addEventListener('change', function () {
+//            let maxOffset = getChannels()-1;
+            doCalc();
+        });
+        channel.addEventListener('change', function () {
+            doCalc();
+        });
+        calcButton.addEventListener("click", doCalc);
+
+        document.getElementById('x').addEventListener('change', doCalc);
+        document.getElementById('y').addEventListener('change', doCalc);
+        document.getElementById('w').addEventListener('change', doCalc);
+        document.getElementById('h').addEventListener('change', doCalc);
+
+        function doCalc() {    
+            let w = parseInt(document.getElementById("w").value);
+            let h = parseInt(document.getElementById("h").value);
+            let x = parseInt(document.getElementById("x").value);
+            let y = parseInt(document.getElementById("y").value);
+
+            // calculate index in pixels array:
+            let calculation = (y * w + x) *  
+                parseInt(channels.selectedOptions[0].value) +  
+                parseInt(channel.selectedOptions[0].value);
+            result.innerHTML = calculation;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head>
+  <title>Pixelating using average colour</title>
+  <script src="libraries/p5.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="utf-8">
+  <style type="text/css">
+    html {
+      font-size: 10px;
+    }
+    body {
+      margin: 2% 15%;
+      font-size: 1.6rem;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    canvas {
+      vertical-align: top;
+      margin: 1rem 1rem;
+      border: 2px double black;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>Image pixelate example</h1>
+    <h2>by Evan Raskob, 2021</h2>
+    <article>
+      <h3>Downsampling an image by averaging the colours of pixels.</h3>
+      <ul>
+        <li>Click the mouse to toggle pixelated or non-pixelated</li>
+        <li>Use up and down arrow keys to increase or decrease pixelisation</li>
+      </ul>
+      <p><i>Note that the number of boxes doesn't always divide evenly into the image,
+        so you might see black space around the bottom or right borders.
+      </i></p>
+      <form action=""><label>Boxes per row: </label><input type="text" name="" size="4" id="boxes" value="20" disabled="true"></form>
+      
+    </article>
+  </div>
+  <script src="sketch.js"></script>
+</body></html>
